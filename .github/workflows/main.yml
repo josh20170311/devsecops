@@ -16,20 +16,20 @@ jobs:
       - run: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.8-1/x64/bin/java -version
       - run: echo $JAVA_HOME
       - run: export JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.8-1/x64
-      # - name: Build with Maven
-      #   run: mvn clean install
-      # - name: Depcheck
-      #   uses: dependency-check/Dependency-Check_Action@main
-      #   id: Depcheck
-      #   with:
-      #     project: 'test'
-      #     path: '.'
-      #     format: 'HTML'
-      #     out: 'reports' # this is the default, no need to specify unless you wish to override it
-      #     args: >
-      #       --enableRetired
-      # - name: Upload Test results
-      #   uses: actions/upload-artifact@master
-      #   with:
-      #      name: Depcheck report
-      #      path: ${{github.workspace}}/reports #
+      - name: Build with Maven
+        run: mvn clean install
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: 'test'
+          path: '.'
+          format: 'HTML'
+          out: 'reports' # this is the default, no need to specify unless you wish to override it
+          args: >
+            --enableRetired
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+           name: Depcheck report
+           path: ${{github.workspace}}/reports #
